@@ -12,7 +12,7 @@ public class JavaLessonSix {
 
     public static void main(String[] args)
     {
-//        getAFile("./somestuff.txt");
+        getAFile("./somestuff.txt");
 //*******************************************************************
 //        System.out.print("How old are you? ");
 //        int age = checkValidAge();
@@ -28,14 +28,14 @@ public class JavaLessonSix {
  *  Catch Order   *
  ******************/
 
-/*
+
     public static void getAFile(String fileName)
     {
         try {
             FileInputStream file = new FileInputStream(fileName);
         }
 
-        catch (ClassNotFoundException e) {}  //  If you want to ignore an error do nothing with it
+//        catch (ClassNotFoundException e) {}  //  If you want to ignore an error do nothing with it
 
         catch (FileNotFoundException e) {  // First catch will catch a specific exception
             System.out.println("Sorry can't find that file");
@@ -49,14 +49,14 @@ public class JavaLessonSix {
             System.out.println("Some error occurred");
         }
 
+//        catch (ClassNotFoundException | IOException e) {}  // In Java SE 7 + you can use | to combine exception catches
         finally {  // Finally will execute no matter what (used for cleanup duty ie close any connections to DB or any open files)
             System.out.println("");
         }
 
-        catch (ClassNotFoundException | IOException e) {}  // In Java SE 7 + you can use | to combine exception catches
 
     }
-*/
+
 
 /*************************
  *   Thrown Exceptions   *
