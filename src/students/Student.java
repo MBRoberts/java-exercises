@@ -1,7 +1,5 @@
 package students;
 
-import static org.apache.commons.lang3.ObjectUtils.compare;
-
 /**
  * Created by M.Ben_Roberts on 11/28/16.
  */

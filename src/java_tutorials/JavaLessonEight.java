@@ -1,9 +1,6 @@
-/**
+package java_tutorials; /**
  * Created by M.Ben_Roberts on 11/19/16.
  */
-
-import java.util.Arrays;
-import org.apache.commons.lang3.ArrayUtils;
 
 
 public class JavaLessonEight {

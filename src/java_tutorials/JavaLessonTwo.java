@@ -1,3 +1,5 @@
+package java_tutorials;
+
 import java.util.Scanner;
 
 public class JavaLessonTwo

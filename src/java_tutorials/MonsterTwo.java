@@ -1,3 +1,5 @@
+package java_tutorials;
+
 import javax.management.monitor.MonitorSettingException;
 
 /*****************************************

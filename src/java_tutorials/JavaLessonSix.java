@@ -1,4 +1,4 @@
-/******************************************
+package java_tutorials; /******************************************
 *  Created by M.Ben_Roberts on 11/17/16.  *
 *  Java tutorials - Catching Exceptions   *
 *******************************************/
