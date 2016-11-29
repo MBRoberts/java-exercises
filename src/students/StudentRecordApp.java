@@ -1,17 +1,18 @@
-/**
+package students; /**
  * Created by M.Ben_Roberts on 11/28/16.
  */
 
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.*;
 
-public class StudentRecordApp {
+class StudentRecordApp {
 
     private static PrintStream output = System.out;
 
-    public static ArrayList<Student> students = new ArrayList<>();
+    static ArrayList<Student> students = new ArrayList<>();
 
-    public static void main(String[] args) {
+    static void main(String[] args) {
 
         String anotherStudent;
         String firstName;
@@ -33,12 +34,14 @@ public class StudentRecordApp {
 
             students.add(student);
 
-            output.print("Another Student(y/n): ");
+            output.print("Another students.Student(y/n): ");
             anotherStudent = StudentIO.anotherStudentInput();
 
             output.println();
 
         }while (anotherStudent.equalsIgnoreCase("y"));
+
+        Collections.sort(students);
 
             StudentIO.studentOutput();
 

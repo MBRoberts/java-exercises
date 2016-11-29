@@ -1,3 +1,5 @@
+package students;
+
 import java.io.PrintStream;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -74,7 +76,7 @@ class StudentIO {
         } catch (InputMismatchException e){
 
             output.println("Please answer 'y' or 'n'!");
-            output.print("Another Student(y/n): ");
+            output.print("Another students.Student(y/n): ");
             input.nextLine();
 
             return anotherStudentInput();
