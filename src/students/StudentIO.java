@@ -1,8 +1,10 @@
 package students;
 
-import java.io.PrintStream;
+import validation.Validation;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import static java.lang.System.*;
+import static students.StudentRecordApp.*;
 
 /**
  * Created by M.Ben_Roberts on 11/28/16.
@@ -10,89 +12,81 @@ import java.util.Scanner;
 
 class StudentIO {
 
-    private static Scanner input = new Scanner(System.in);
-    private static PrintStream output = System.out;
+    private static Scanner input = new Scanner(in);
     private static int i = 0;
 
-    static String studentNameInput(){
-
-        Scanner input = new Scanner(System.in);
+    static String studentNameInput(Validation validation){
 
         try {
 
             String name = input.nextLine();
 
-            if(name.isEmpty() || !name.matches("[a-zA-Z]+")){
-                throw new InputMismatchException();
-            }
+            if(!validation.isValid(name)) throw new InputMismatchException();
 
             return name;
 
         } catch(InputMismatchException e) {
 
-            output.println("Must be a valid name!");
-            output.print("Please re-enter the student's name: ");
+            out.println(validation.errorMessage());
+            out.print("Please re-enter the student's name: ");
 
-            return studentNameInput();
+            return studentNameInput(validation);
         }
     }
 
-    static int studentScoreInput(){
+    static int studentScoreInput(Validation validation){
 
         try {
 
             int score = input.nextInt();
 
-            if(score < 0 || score > 100){
-                throw new InputMismatchException();
-
-            }
+            if(!validation.isValid(score)) throw new InputMismatchException();
 
             return score;
 
         } catch(InputMismatchException e) {
 
-            output.println("Must be a valid number! Try Again");
-            output.print("Please re-enter student's score: ");
+            out.println(validation.errorMessage());
+            out.print("Please re-enter student's score: ");
             input.nextLine();
 
-            return studentScoreInput();
+            return studentScoreInput(validation);
         }
     }
 
-    static String anotherStudentInput(){
+    static String anotherStudentInput(Validation validation){
 
         try {
 
             String answer = input.next(("[yYnN]"));
             input.nextLine();
 
-            if(answer.equalsIgnoreCase("N")){
-                input.close();
-            }
+            if(!validation.isValid(answer)) throw new InputMismatchException();
+
+            if(answer.equalsIgnoreCase("N")) input.close();
 
             return answer;
 
         } catch (InputMismatchException e){
 
-            output.println("Please answer 'y' or 'n'!");
-            output.print("Another students.Student(y/n): ");
+            out.println("Please answer 'y' or 'n'!");
+            out.println();
+            out.print("Another students.Student(y/n): ");
             input.nextLine();
 
-            return anotherStudentInput();
+            return anotherStudentInput(validation);
         }
     }
 
     static void studentOutput(){
 
-        if(i < StudentRecordApp.students.size()) {
+        if(i < students.size()) {
 
-            output.print((i + 1) + ") " + StudentRecordApp.students.get(i).getFullName());
-            output.println(" - " + StudentRecordApp.students.get(i).getScore());
+            out.print((i + 1) + ") " + students.get(i).getFullName());
+            out.println(" - " + students.get(i).getScore());
 
             i++;
             studentOutput();
-
         }
     }
 }

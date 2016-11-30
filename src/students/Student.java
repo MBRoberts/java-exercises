@@ -11,8 +11,8 @@ class Student implements Comparable<Student>{
     private int score;
 
     public int compareTo(Student other){
-        int last = this.lastName.compareTo(other.lastName);
-        return last == 0 ? this.firstName.compareTo(other.firstName) : last;
+        int last = this.lastName.toLowerCase().compareTo(other.lastName.toLowerCase());
+        return (last == 0) ? this.firstName.toLowerCase().compareTo(other.firstName.toLowerCase()) : last;
     }
 
     Student(String firstName, String lastName, int score){

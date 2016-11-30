@@ -2,6 +2,9 @@ package students; /**
  * Created by M.Ben_Roberts on 11/28/16.
  */
 
+import validation.NonEmptyString;
+import validation.NumberInRange;
+
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.*;
@@ -12,7 +15,7 @@ class StudentRecordApp {
 
     static ArrayList<Student> students = new ArrayList<>();
 
-    static void main(String[] args) {
+    public static void main(String[] args) {
 
         String anotherStudent;
         String firstName;
@@ -22,20 +25,21 @@ class StudentRecordApp {
 
         do{
             output.print("Please enter student's first name: ");
-            firstName = StudentIO.studentNameInput();
+            firstName = StudentIO.studentNameInput(new NonEmptyString());
 
             output.print("Please enter student's last name: ");
-            lastName = StudentIO.studentNameInput();
+            lastName = StudentIO.studentNameInput(new NonEmptyString());
 
             output.print("Please enter student's score: ");
-            score = StudentIO.studentScoreInput();
+            score = StudentIO.studentScoreInput(new NumberInRange(0, 100));
 
             student = new Student(firstName, lastName, score);
 
             students.add(student);
 
-            output.print("Another students.Student(y/n): ");
-            anotherStudent = StudentIO.anotherStudentInput();
+            output.println();
+            output.print("Another student(y/n): ");
+            anotherStudent = StudentIO.anotherStudentInput(new NonEmptyString());
 
             output.println();
 
