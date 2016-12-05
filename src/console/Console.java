@@ -1,59 +1,74 @@
+/**
+ * This source file is subject to the license that is bundled with this package in the file LICENSE.
+ */
 package console;
 
-import validation.Validation;
+import validation.IntegerFromString;
+import validation.IsInWhiteList;
+import validation.NumberInRange;
+import validation.Validator;
+
+import java.io.IOException;
 import java.io.PrintStream;
-import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
-/**
- * Created by M.Ben_Roberts on 11/30/16.
- */
 public class Console {
+    private final Scanner input;
+    private final PrintStream output;
 
-    private PrintStream output = System.out;
-    private Scanner input;
-
-    public Console() {
-        this.input = new Scanner(System.in);
+    public Console(Scanner input, PrintStream output) {
+        this.input = input;
+        this.output = output;
     }
 
-    public int getInputNumber(String message, Validation validation){
-        int userInput;
-
-        try {
-            output.print(message);
-            userInput = input.nextInt();
-
-            if (!validation.isValid(userInput)) throw new InputMismatchException();
-
-            return userInput;
-
-        } catch (InputMismatchException e){
-
-            input.nextLine();
-            output.println("\n" + validation.errorMessage() + "\n");
-            return getInputNumber(message, validation);
+    public String promptForText(String message, Validator<String> validator) {
+        output.print(message);
+        String text = input.next();
+        if (!validator.isValid(text)) {
+            output.println(validator.errorMessage());
+            return promptForText(message, validator);
         }
+        return text;
     }
 
-    public String getInputString(String message, Validation validation){
-        String userInput;
-
-        try {
-            output.print(message);
-            userInput = input.nextLine();
-
-            if (!validation.isValid(userInput)) throw new InputMismatchException();
-
-            return userInput;
-
-        } catch (InputMismatchException e){
-
-            output.println("\n" + validation.errorMessage() + "\n");
-
-            return getInputString(message, validation);
+    public int promptForInteger(String message, Validator<String> validator) {
+        output.print(message);
+        String possiblyANumber = input.next();
+        if (!validator.isValid(possiblyANumber)) {
+            output.println(validator.errorMessage());
+            return promptForInteger(message, validator);
         }
+        return Integer.parseInt(possiblyANumber);
     }
 
+    public int chooseFromList(String message, List options) {
+        output.println(buildOptionsList(options));
+        int chosenNumber = promptForInteger(
+                message,
+                new IntegerFromString(new NumberInRange(1, options.size()))
+        );
+        return chosenNumber - 1;
+    }
 
+    private String buildOptionsList(List options) {
+        String list = "";
+        for (int i = 0; i < options.size(); i++) {
+            list += String.format("%n%d) %s", i + 1, options.get(i));
+        }
+        return list;
+    }
+
+    public void askYesNoQuestion(String message, Action action) throws IOException {
+        String answer;
+        do {
+            action.execute();
+            output.println(message);
+            answer = promptForText(message, new IsInWhiteList("y", "n"));
+        } while ("y".equalsIgnoreCase(answer));
+    }
+
+    public void message(String message) {
+        output.println(message);
+    }
 }

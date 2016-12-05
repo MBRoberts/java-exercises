@@ -3,7 +3,7 @@ package validation;
 /**
  * Created by M.Ben_Roberts on 11/30/16.
  */
-public class NumberIsPositive implements Validation {
+public class NumberIsPositive implements Validator {
 
     @Override
     public boolean isValid(Object value) {

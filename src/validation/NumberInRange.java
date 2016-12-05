@@ -1,26 +1,33 @@
+/**
+ * This source file is subject to the license that is bundled with this package in the file LICENSE.
+ */
 package validation;
 
-/**
- * Created by M.Ben_Roberts on 11/29/16.
- */
-
-public class NumberInRange implements Validation {
-
-    private final int min;
-    private final int max;
+public class NumberInRange implements Validator<Integer> {
+    private int min;
+    private int max;
 
     public NumberInRange(int min, int max) {
+        assertValidRange(min, max);
         this.min = min;
         this.max = max;
     }
 
+    private void assertValidRange(int min, int max) {
+        if (min > max) {
+            throw  new IllegalArgumentException(String.format(
+                    "%d cannot be greater than %d", min, max
+            ));
+        }
+    }
+
     @Override
-    public boolean isValid(Object value) {
-        return (value instanceof Integer) && (min < (int) value) && ((int) value < max);
+    public boolean isValid(Integer value) {
+        return min <= value && value <= max;
     }
 
     @Override
     public String errorMessage() {
-        return "Number must be between " + min + " and " + max;
+        return String.format("Enter a number between %d and %d", min, max);
     }
 }

@@ -1,19 +1,16 @@
+/**
+ * This source file is subject to the license that is bundled with this package in the file LICENSE.
+ */
 package validation;
 
-/**
- * Created by M.Ben_Roberts on 11/29/16.
- */
-public class NonEmptyString implements Validation {
+public class NonEmptyString implements Validator<String> {
     @Override
-    public boolean isValid(Object value) {
-        if (!(value instanceof String)) {
-            return false; // it is invalid
-        }
-        return !((String) value).trim().isEmpty();
+    public boolean isValid(String value) {
+        return !value.trim().isEmpty();
     }
 
     @Override
     public String errorMessage() {
-        return "Cannot be empty";
+        return "This value cannot be empty";
     }
 }
