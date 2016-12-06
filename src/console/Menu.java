@@ -3,6 +3,7 @@
  */
 package console;
 
+import action.Action;
 import validation.IntegerFromString;
 import validation.NumberInRange;
 
@@ -12,12 +13,14 @@ import java.util.Map;
 
 public class Menu {
     private final Console console;
+    private final String menuTitle;
     private int next = 0;
     private int exitOption;
     private Map<Integer, MenuOption> options = new LinkedHashMap<>();
 
-    public Menu(Console console) {
+    public Menu(Console console, String menuTitle) {
         this.console = console;
+        this.menuTitle = menuTitle;
     }
 
     public void addOption(String title, Action action) {
@@ -38,10 +41,13 @@ public class Menu {
     }
 
     private String render() {
-        String menu = "";
+        String menu = "\n\u001B[36m----------------------------\u001B[0m\n";
+        menu += menuTitle;
+        menu += "\n\u001B[36m----------------------------\u001B[0m\n";
         for (Map.Entry<Integer, MenuOption> pair : options.entrySet()) {
             menu += String.format("%d) %s\n", pair.getKey() + 1, pair.getValue());
         }
+        menu += "\n\u001B[36m----------------------------\u001B[0m\n";
         return menu;
     }
 

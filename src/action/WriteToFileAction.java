@@ -1,9 +1,7 @@
-package countries;
+package action;
 
-import console.Action;
 import console.Console;
-import validation.NonEmptyString;
-
+import validation.Validator;
 import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -13,13 +11,19 @@ import java.util.Scanner;
 /**
  * Created by M.Ben_Roberts on 12/5/16.
  */
-public class EnterAction implements Action {
+public class WriteToFileAction implements Action {
     private final Path folderPath;
     private final Path filePath;
+    private final boolean append;
+    private final String prompt;
+    private final Validator validator;
 
-    public EnterAction(String folder, String filename) {
+    public WriteToFileAction(String folder, String filename, boolean append, String prompt, Validator validator) {
         this.folderPath = Paths.get(folder);
         this.filePath = Paths.get(folder, filename);
+        this.append = append;
+        this.prompt = prompt;
+        this.validator = validator;
     }
 
     @Override
@@ -32,12 +36,12 @@ public class EnterAction implements Action {
         }
 
         try (
-                FileWriter fileWriter = new FileWriter(filePath.toFile(), true);
-                BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-                PrintWriter output = new PrintWriter(bufferedWriter);
+            FileWriter fileWriter = new FileWriter(filePath.toFile(), append);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            PrintWriter output = new PrintWriter(bufferedWriter);
         ) {
             Console console = new Console(new Scanner(System.in), new PrintStream(System.out));
-            String input = console.promptForText("Enter Country: ", new NonEmptyString());
+            String input = console.promptForText(prompt, validator);
 
             output.println(input);
 

@@ -3,6 +3,8 @@
  */
 package console;
 
+import action.Action;
+
 import java.io.IOException;
 
 public class MenuOption {

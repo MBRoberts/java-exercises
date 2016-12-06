@@ -3,11 +3,11 @@
  */
 package console;
 
+import action.Action;
 import validation.IntegerFromString;
 import validation.IsInWhiteList;
 import validation.NumberInRange;
 import validation.Validator;
-
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.List;
