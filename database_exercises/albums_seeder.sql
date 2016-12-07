@@ -1,12 +1,3 @@
-CREATE TABLE albums (
-  id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  artist VARCHAR(100) NOT NULL,
-  album VARCHAR(100) NOT NULL ,
-  genre VARCHAR(100) NOT NULL ,
-  release_date YEAR,
-  sales_in_millions DECIMAL (8, 2) NOT NULL,
-  PRIMARY KEY (id)
-);
 
 INSERT INTO albums (artist, album, genre, release_date, sales_in_millions) VALUES ('Michael Jackson', 'Thriller', 'Pop, Rock, R&B', 1982, 65.00),
   ('AC/DC', 'Back in Black', 'Hard rock', 1980, 50.00),
