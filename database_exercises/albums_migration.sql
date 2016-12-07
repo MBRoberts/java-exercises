@@ -10,3 +10,4 @@ CREATE TABLE albums(
   sales_in_millions DECIMAL (8, 2) NOT NULL,
   PRIMARY KEY (id)
 );
+
