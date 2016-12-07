@@ -16,7 +16,7 @@ public class CountriesApp {
 
     public static void main(String[] args) {
         Menu menu = new Menu(console, "\t\tCountries");
-        System.out.println("");
+        System.out.println();
         menu.addOption("Display Countries", new PrintFromFileAction("resources", "countries.txt"));
         menu.addOption("Enter new Country", new WriteToFileAction("resources", "countries.txt", true, "Enter Country: ", new NonEmptyString()));
         menu.addOption("Delete Country", new RemoveLineFromFileAction("resources", "countries.txt", "\nWhich country to remove: "));
